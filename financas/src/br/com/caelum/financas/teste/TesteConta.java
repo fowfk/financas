@@ -12,9 +12,9 @@ public class TesteConta {
 		
 		Conta conta = new Conta();
 		conta.setTitular("Bruno");
-		conta.setAgencia("123");
+		conta.setAgencia("1798");
 		conta.setBanco("Inter");
-		conta.setNumero("4648");
+		conta.setNumero("0006568");
 		
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("financas");
