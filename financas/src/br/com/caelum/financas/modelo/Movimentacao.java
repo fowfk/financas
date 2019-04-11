@@ -36,10 +36,10 @@ public class Movimentacao {
 	private Conta conta;
 	
 	@ManyToMany
-	private List<Categoria> categorias;
+	private List<Categoria> categoria;
 
 	public void setCategorias(List<Categoria> categoria) {
-		this.categorias = categoria;
+		this.categoria = categoria;
 	}
 
 	public Conta getConta() {

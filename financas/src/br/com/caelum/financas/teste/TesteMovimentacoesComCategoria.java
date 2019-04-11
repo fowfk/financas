@@ -43,14 +43,14 @@ public class TesteMovimentacoesComCategoria {
 		EntityManager em = new JPAUtil().getEntityManager();
 		em.getTransaction().begin();
 		
-//		em.persist(categoria1);
-//		em.persist(categoria2);
-//		
-//		em.persist(movimentacao1);
-//		em.persist(movimentacao2);
+		em.persist(categoria1);
+		em.persist(categoria2);
 		
-		movimentacao1 = em.find(Movimentacao.class, 3);
-		movimentacao1.setValor(new BigDecimal("200.0"));
+		em.persist(movimentacao1);
+		em.persist(movimentacao2);
+		
+//		movimentacao1 = em.find(Movimentacao.class, 3);
+//		movimentacao1.setValor(new BigDecimal("200.0"));
 		
 		em.getTransaction().commit();
 		
