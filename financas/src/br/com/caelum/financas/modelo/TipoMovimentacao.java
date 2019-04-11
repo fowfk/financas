@@ -1,6 +1,6 @@
 package br.com.caelum.financas.modelo;
 
 public enum TipoMovimentacao {
-	ENTREDA,SAIDA;
+	ENTRADA,SAIDA;
 
 }
