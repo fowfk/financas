@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.Base64Data;
+
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
@@ -21,7 +23,7 @@ public class TesteJPQL {
 		Conta conta = new Conta();
 		conta.setId(2);
 		
-		String jpql = "select m from Movimentacao m where m.conta = :pConta" +
+		String jpql = "select avg(m.valor) from Movimentacao m where m.conta = :pConta" +
 		" and m.tipo = :pTipo" +		
 		" order by m.valor desc";
 		
@@ -29,13 +31,9 @@ public class TesteJPQL {
 		query.setParameter("pConta", conta);
 		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
 		
-		List<Movimentacao> resultados = query.getResultList();
+		Double media = (Double) query.getSingleResult();
 		
-		for (Movimentacao movimentacao : resultados) {
-			System.out.println("Descrição: " + movimentacao.getDescricao());
-			System.out.println("Conta.id: " + movimentacao.getConta().getId());
-			
-		}
+		System.out.println("A media é: " + media);
 		
 		em.getTransaction().commit();
 		
