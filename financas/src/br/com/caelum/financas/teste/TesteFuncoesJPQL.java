@@ -21,17 +21,24 @@ public class TesteFuncoesJPQL {
 		Conta conta = new Conta();
 		conta.setId(2);
 		
-		String jpql = "select avg(m.valor) from Movimentacao m where m.conta = :pConta "
-				+ "and m.tipo = :pTipo "
-				+ "group by day(m.data), month(m.data), year(m.data)";
+		TypedQuery<Double> typedQuery = em.createNamedQuery("MediasPorDiaETipo", Double.class);
 		
-		TypedQuery<Double> query = em.createQuery(jpql, Double.class);
-		query.setParameter("pConta", conta);
-		query.setParameter("pTipo", TipoMovimentacao.SAIDA);
+		typedQuery.setParameter("pConta", conta);
+		typedQuery.setParameter("pTipo", TipoMovimentacao.SAIDA);
 		
-		List<Double> medias = (List<Double>) query.getResultList();
-		System.out.println("A média do dia 26 é :" + medias.get(0));
-		System.out.println("A média do dia 27 é: " + medias.get(1));
+		
+		List<Double> medias = typedQuery.getResultList();
+		
+		for (Double media : medias) {
+			System.out.println("A média é: " + media);
+		}
+
+		
+		
+//		List<Double> medias = dao.getMediasPorDiaETipo(TipoMovimentacao.SAIDA, conta);
+//		
+//		System.out.println("A média do dia 26 é :" + medias.get(0));
+//		System.out.println("A média do dia 27 é: " + medias.get(1));
 		
 		em.getTransaction().commit();
 		

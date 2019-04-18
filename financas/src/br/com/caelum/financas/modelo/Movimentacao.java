@@ -12,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQuery(query = "select distinct avg(m.valor) from Movimentacao m where m.conta = :pConta and m.tipo = :pTipo "
+		+ "group by day(m.data), month(m.data), year(m.data)", name="MediasPorDiaETipo")
 public class Movimentacao {
 
 	@Id
@@ -31,10 +34,10 @@ public class Movimentacao {
 	private Calendar data;
 
 	private String descricao;
-	
+
 	@ManyToOne
 	private Conta conta;
-	
+
 	@ManyToMany
 	private List<Categoria> categoria;
 
@@ -89,7 +92,7 @@ public class Movimentacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.descricao;
